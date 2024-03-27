@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET', '989t2tgfi0pbg4-93yrf0ipenv-943h2d90poxcm[-9h804g0v8bip3onm[dj9c0h-5[4tk3f=9-yhc3-pehg8v0g38-ipghv=[9-4[ooinvbouevwqbuocbv8yiv4b32f0vb4p32ihfvou4i3fv0pi3yr80fip')
+SECRET_KEY = os.environ.get('SECRET_KEY', '989t2tgfi0pbg4-93yrf0ipenv-943h2d90poxcm[-9h804g0v8bip3onm[dj9c0h-5[4tk3f=9-yhc3-pehg8v0g38-ipghv=[9-4[ooinvbouevwqbuocbv8yiv4b32f0vb4p32ihfvou4i3fv0pi3yr80fip')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
@@ -140,3 +140,19 @@ if not DEBUG:
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3001']
+# CSRF_COOKIE_DOMAIN = 'http://localhost:8000'
+
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     # Add other allowed origins if needed
+# ]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3001',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
