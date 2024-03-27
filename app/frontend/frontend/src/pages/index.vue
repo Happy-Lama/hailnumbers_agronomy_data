@@ -58,11 +58,11 @@
 <script setup>
   
 import ChartComponent from '@/components/ChartComponent.vue';
-import { onMounted } from 'vue';
+import { onMounted, watch } from 'vue';
 import { ref } from 'vue';
 import { useAppStore } from '@/store/app';
 import axios from 'axios';
-import store from '@/store';
+// import store from '@/store';
 
 const appStore = useAppStore();
 
@@ -109,7 +109,7 @@ watch(() => appStore.stored_values, (newVal) => {
     values.timestamps.push(newVal.id)
     values.moisture.push(newVal.soil_moisture)
     values.temp.push(newVal.soil_temperature)
-    values.ec.push(newVal.electrical_conductivity)
+    values.ec.push(newVal.soil_electrical_conductivity)
     values.ph.push(newVal.soil_ph)
     values.npk.n.push(newVal.soil_nitrogen_content)
     values.npk.p.push(newVal.soil_phosphorus_content)
@@ -134,7 +134,7 @@ watch(() => appStore.stored_values, (newVal) => {
               label: "Temperature", 
               backgroundColor: "#0000ff",
               borderColor: "#0000ff",
-              data: newVal.temp
+              data: values.temp
       }]
   }
 
