@@ -16,8 +16,13 @@ def add_parameters(request):
         print(data)
         data = json.loads(data)
         datetime_format = "%Y-%m-%d %H:%M:%S"
+        # try:
         data['timestamp'] = datetime.datetime.strptime(data['timestamp'], datetime_format)
+        print(data)
         serializer = SoilParametersSerializer(data=data)
+        print(serializer.data)
+        # except:
+            
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
