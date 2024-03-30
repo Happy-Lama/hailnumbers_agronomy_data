@@ -14,12 +14,13 @@ import csv
 def add_parameters(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        print(data)
+        print("Received Data", data)
         data = json.loads(data)
         datetime_format = "%Y-%m-%d %H:%M:%S"
         # try:
+        print("Data before adjusting timestamp", data)
         data['timestamp'] = datetime.datetime.strptime(data['timestamp'], datetime_format)
-        print(data)
+        print("Data after timestamp adjusting", data)
         serializer = SoilParametersSerializer(data=data)
         print(serializer.data)
         # except:
