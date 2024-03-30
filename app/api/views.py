@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from .serializers import SoilParametersSerializer
 from .models import SoilParameters
 import json
+import datetime
 # Create your views here.
 
 @csrf_exempt
@@ -13,7 +14,10 @@ def add_parameters(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         print(data)
-        serializer = SoilParametersSerializer(data=json.loads(data))
+        data = json.loads(data)
+        datetime_format = "%Y-%m-%d %H:%M:%S"
+        data['timestamp'] = datetime.datetime.strptime(data['timestamp'], datetime_format)
+        serializer = SoilParametersSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_201_CREATED)
