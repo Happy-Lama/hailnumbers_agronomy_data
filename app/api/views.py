@@ -20,7 +20,7 @@ def add_parameters(request):
         # try:
         print("Data before adjusting timestamp", data)
         # data['timestamp'] = datetime.datetime.strptime(data['timestamp'], datetime_format)
-        print("Data after timestamp adjusting", data)
+        # print("Data after timestamp adjusting", data)
         serializer = SoilParametersSerializer(data=data)
     
         print("Serialized data",serializer.data)
