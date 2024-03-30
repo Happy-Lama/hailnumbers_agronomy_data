@@ -19,10 +19,11 @@ def add_parameters(request):
         datetime_format = "%Y-%m-%d %H:%M:%S"
         # try:
         print("Data before adjusting timestamp", data)
-        data['timestamp'] = datetime.datetime.strptime(data['timestamp'], datetime_format)
+        # data['timestamp'] = datetime.datetime.strptime(data['timestamp'], datetime_format)
         print("Data after timestamp adjusting", data)
         serializer = SoilParametersSerializer(data=data)
-        print(serializer.data)
+    
+        print("Serialized data",serializer.data)
         # except:
             
         if serializer.is_valid():
