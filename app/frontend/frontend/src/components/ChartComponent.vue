@@ -54,7 +54,7 @@ const chartOptions = ref({
                             return value.toFixed(2) + " mg/kg";
                         }
                         if(props.dataType === "ec"){
-                            return value + " us/cm";
+                            return value.toFixed(2) + " us/cm";
                         }
                         if(props.dataType === "ph"){
                             return value.toFixed(2) + "PH";

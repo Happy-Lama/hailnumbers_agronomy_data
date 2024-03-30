@@ -1,11 +1,7 @@
 <template>
-  <v-app>
-    <v-main>
-      <router-view />
-    </v-main>
-  </v-app>
+  <Default />
 </template>
 
 <script setup>
-  //
+  import Default from './layouts/default.vue';
 </script>
