@@ -62,7 +62,7 @@
         <v-row class="my-2" justify="space-around">
           <!-- <v-col> -->
           
-          <a href="http://127.0.0.1:8000//api/soilParameters/download/" style="text-decoration: none;">
+          <a href="https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/download/" style="text-decoration: none;">
             <v-btn rounded="lg" size="x-large" block variant="outlined">
               Download Data As CSV
             </v-btn>
@@ -213,8 +213,8 @@ watch(() => appStore.stored_values, (newVal) => {
 // }
 
 onMounted(() => {
-  // axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/all/")
-  axios.get("http://127.0.0.1:8000/api/soilParameters/all/")
+  axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/all/")
+  // axios.get("http://127.0.0.1:8000/api/soilParameters/all/")
   .then((response) => {
     console.log(response.data)
     appStore.stored_values = response.data
