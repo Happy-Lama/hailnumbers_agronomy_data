@@ -15,7 +15,7 @@ def add_parameters(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         print("Received Data", data)
-        data = json.loads(data)
+        # data = json.loads(data)
         datetime_format = "%Y-%m-%d %H:%M:%S"
         # try:
         print("Data before adjusting timestamp", data)
