@@ -1,10 +1,12 @@
 import requests
 import json
+import time
 # Define the URL where the POST requests will be sent
 url = 'http://localhost:8000/api/soilParameters/add/'
 
 # Define the data to be sent in the POST request
 data = {
+    'timestamp': time.strftime("%Y-%m-%d %H:%M:%S"),
     'soil_temperature': 25.5,
     'soil_moisture': 0.6,
     'soil_ph': 6.5,

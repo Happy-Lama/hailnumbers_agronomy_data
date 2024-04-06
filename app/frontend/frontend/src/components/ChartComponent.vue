@@ -41,7 +41,7 @@ const chartOptions = ref({
                 text: "Time"
             }, 
             ticks : {
-                display: false,
+                display: true,
             }
         },
         y: {

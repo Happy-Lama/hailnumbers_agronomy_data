@@ -78,7 +78,7 @@
 <script setup>
   
 import ChartComponent from '@/components/ChartComponent.vue';
-import { onMounted, watch } from 'vue';
+import { onMounted, watch, onBeforeMount } from 'vue';
 import { ref } from 'vue';
 import { useAppStore } from '@/store/app';
 import axios from 'axios';
@@ -111,7 +111,7 @@ const temp = ref({
   datasets: []
 })
 
-watch(() => appStore.stored_values, (newVal) => {
+const updateValues = (newVal) => {
   let values = {
     timestamps: [],
     moisture: [],
@@ -143,7 +143,9 @@ watch(() => appStore.stored_values, (newVal) => {
               label: "Conductivity", 
               backgroundColor: "#0000ff",
               borderColor: "#0000ff",
-              data: values.ec
+              data: values.ec,
+              tension: 0.2,
+              pointRadius: 0
       }]
   }
 
@@ -154,7 +156,9 @@ watch(() => appStore.stored_values, (newVal) => {
               label: "Temperature", 
               backgroundColor: "#0000ff",
               borderColor: "#0000ff",
-              data: values.temp
+              data: values.temp,
+              tension: 0.2,
+              pointRadius: 0
       }]
   }
 
@@ -165,7 +169,9 @@ watch(() => appStore.stored_values, (newVal) => {
               label: "Moisture", 
               backgroundColor: "#0000ff",
               borderColor: "#0000ff",
-              data: values.moisture
+              data: values.moisture,
+              tension: 0.2,
+              pointRadius: 0
       }]
   }
 
@@ -176,7 +182,9 @@ watch(() => appStore.stored_values, (newVal) => {
               label: "PH", 
               backgroundColor: "#0000ff",
               borderColor: "#0000ff",
-              data: values.ph
+              data: values.ph,
+              tension: 0.2,
+              pointRadius: 0
       }]
   }
 
@@ -187,23 +195,32 @@ watch(() => appStore.stored_values, (newVal) => {
         label: "Nitrogen", 
         backgroundColor: "#0000ff",
         borderColor: "#0000ff",
-        data: values.npk.n
+        data: values.npk.n,
+        tension: 0.2,
+        pointRadius: 0
       },
       {
         label: "Phosphorus", 
         backgroundColor: "#00ff00",
         borderColor: "#00ff00",
-        data: values.npk.p
+        data: values.npk.p,
+        tension: 0.2,
+        pointRadius: 0
       },
       {
         label: "Potassium", 
         backgroundColor: "#ff0000",
         borderColor: "#ff0000",
-        data: values.npk.k
+        data: values.npk.k,
+        tension: 0.2,
+        pointRadius: 0
       }
     ]
   }
-         
+}
+
+watch(() => appStore.stored_values, (newVal) => {
+  updateValues(newVal)      
 })
 
 
@@ -213,12 +230,16 @@ watch(() => appStore.stored_values, (newVal) => {
 // }
 
 onMounted(() => {
-  axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/all/")
-  // axios.get("http://127.0.0.1:8000/api/soilParameters/all/")
-  .then((response) => {
-    console.log(response.data)
-    appStore.stored_values = response.data
-  })
+  if( appStore.stored_values == null){
+    axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/all/")
+    // axios.get("http://127.0.0.1:8000/api/soilParameters/all/")
+    .then((response) => {
+      console.log(response.data)
+      appStore.stored_values = response.data
+    })
+  } else {
+    updateValues(appStore.stored_values)
+  }
   
 })
 

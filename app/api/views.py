@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from .serializers import SoilParametersSerializer
 from .models import SoilParameters
 import json
-import datetime
+# import datetime
 import csv
 # Create your views here.
 
@@ -14,23 +14,15 @@ import csv
 def add_parameters(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        print("Received Data", data)
-        # data = json.loads(data)
-        datetime_format = "%Y-%m-%d %H:%M:%S"
-        # try:
-        print("Data before adjusting timestamp", data)
-        # data['timestamp'] = datetime.datetime.strptime(data['timestamp'], datetime_format)
-        # print("Data after timestamp adjusting", data)
-        serializer = SoilParametersSerializer(data=data)
-    
-        print("Serialized data",serializer.data)
-        # except:
-            
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-        else:
-            print(serializer.errors)
+        # print("Received Data", data)
+        if data:
+            serializer = SoilParametersSerializer(data=json.loads(data))
+                
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+            else:
+                print(serializer.errors)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
 
