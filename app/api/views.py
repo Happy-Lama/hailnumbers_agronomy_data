@@ -17,6 +17,8 @@ def add_parameters(request):
         data = json.loads(request.body.decode('utf-8'))
         print("Received Data", data)
         print("Type received:", type(data))
+        for key in data.keys():
+            print("Key:", key, ", type of data:", data[key], type(data[key]))
         if data:
             serializer = SoilParametersSerializer(data=data)
             
