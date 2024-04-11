@@ -18,13 +18,17 @@ def add_parameters(request):
         print("Received Data", data)
         print("Type received:", type(data))
         for key in data.keys():
-            print("Key:", key, ", type of data:", data[key], type(data[key]))
+            if key != 'timestamp':
+                data[key] = float(data[key])
         if data:
             serializer = SoilParametersSerializer(data=data)
             
             if serializer.is_valid():
                 print(serializer.data)
-                print(serializer.save())
+                try:
+                    serializer.save()
+                except:
+                    print("Error occurred")
                 return Response(status=status.HTTP_201_CREATED)
             else:
                 print(serializer.errors)
