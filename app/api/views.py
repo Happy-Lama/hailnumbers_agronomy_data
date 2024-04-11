@@ -22,10 +22,7 @@ def add_parameters(request):
             
             if serializer.is_valid():
                 print(serializer.data)
-                try:
-                    serializer.save()
-                except APIException as e:
-                    print(e)
+                print(serializer.save())
                 return Response(status=status.HTTP_201_CREATED)
             else:
                 print(serializer.errors)
