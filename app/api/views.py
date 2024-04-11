@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from .serializers import SoilParametersSerializer
 from .models import SoilParameters
 import json
+from rest_framework.exceptions import APIException
 # import datetime
 import csv
 # Create your views here.
@@ -21,7 +22,10 @@ def add_parameters(request):
             
             if serializer.is_valid():
                 print(serializer.data)
-                serializer.save()
+                try:
+                    serializer.save()
+                except APIException as e:
+                    print(e)
                 return Response(status=status.HTTP_201_CREATED)
             else:
                 print(serializer.errors)
