@@ -17,7 +17,7 @@ def add_parameters(request):
         print("Received Data", data)
         print("Type received:", type(data))
         if data:
-            serializer = SoilParametersSerializer(data=json.loads(data))
+            serializer = SoilParametersSerializer(data=data)
             
             if serializer.is_valid():
                 print(serializer.data)
