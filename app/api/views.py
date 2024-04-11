@@ -18,8 +18,9 @@ def add_parameters(request):
         print("Type received:", type(data))
         if data:
             serializer = SoilParametersSerializer(data=json.loads(data))
-             
+            
             if serializer.is_valid():
+                print(serializer.data)
                 serializer.save()
                 return Response(status=status.HTTP_201_CREATED)
             else:
