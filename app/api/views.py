@@ -14,10 +14,11 @@ import csv
 def add_parameters(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        # print("Received Data", data)
+        print("Received Data", data)
+        print("Type received:", type(data))
         if data:
             serializer = SoilParametersSerializer(data=json.loads(data))
-                
+             
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_201_CREATED)
