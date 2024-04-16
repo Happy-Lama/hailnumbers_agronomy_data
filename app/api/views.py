@@ -1,9 +1,12 @@
+# 16/04/2024: added new view function to fetch modules and adjusted to fetch module parameters
+
+
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import Response, status
 from rest_framework.decorators import api_view
-from .serializers import SoilParametersSerializer
-from .models import SoilParameters
+from .serializers import SoilParametersSerializer, DataCollectionModuleSerializer
+from .models import SoilParameters, DataCollectionModule
 import json
 from rest_framework.exceptions import APIException
 # import datetime
@@ -36,12 +39,19 @@ def add_parameters(request):
     
 
 @api_view(['GET'])
-def get_parameters(request):
-    parameters = SoilParameters.objects.all()
+def get_parameters(request, module_id):
+    module = DataCollectionModule.objects.get(module_id=module_id)
+    parameters = module.soilparameters_set.order_by('-timestamp')
     serialized_parameters = SoilParametersSerializer(parameters, many=True)
     return Response(data=serialized_parameters.data, status=status.HTTP_200_OK)
 
-
+@api_view(['GET'])
+def get_modules(request):
+    modules = DataCollectionModule.objects.all()
+    if modules:
+        serializer = DataCollectionModuleSerializer(modules, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
 
 def download_csv(request):
     queryset = SoilParameters.objects.all()
