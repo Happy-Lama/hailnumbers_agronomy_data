@@ -1,5 +1,7 @@
 <template>
   <!-- <v-card title="Historical Data Trends and Graphs"> -->
+    <MapComponent />
+    <TimeRangeFilterComponent />
     <v-container fluid>
       
       <v-row justify="center">
@@ -62,7 +64,8 @@
         <v-row class="my-2" justify="space-around">
           <!-- <v-col> -->
           
-          <a href="https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/download/" style="text-decoration: none;">
+          <a href="https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/download/{{appStore.selected_module}}/" style="text-decoration: none;">
+          <!-- <a href="http://127.0.0.1:8000/api/soilParameters/download/{{appStore.selected_module}}/" style="text-decoration: none;"> -->
             <v-btn rounded="lg" size="x-large" block variant="outlined">
               Download Data As CSV
             </v-btn>
@@ -82,6 +85,8 @@ import { onMounted, watch, onBeforeMount } from 'vue';
 import { ref } from 'vue';
 import { useAppStore } from '@/store/app';
 import axios from 'axios';
+import MapComponent from '@/components/MapComponent.vue';
+import TimeRangeFilterComponent from '@/components/TimeRangeFilterComponent.vue';
 // import store from '@/store';
 
 const appStore = useAppStore();
@@ -230,16 +235,18 @@ watch(() => appStore.stored_values, (newVal) => {
 // }
 
 onMounted(() => {
-  if( appStore.stored_values == null){
-    axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/all/")
-    // axios.get("http://127.0.0.1:8000/api/soilParameters/all/")
-    .then((response) => {
-      console.log(response.data)
-      appStore.stored_values = response.data
-    })
-  } else {
-    updateValues(appStore.stored_values)
-  }
+  // if( appStore.stored_values == null){
+  //   axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/all/")
+  //   // axios.get("http://127.0.0.1:8000/api/soilParameters/all/")
+  //   .then((response) => {
+  //     console.log(response.data)
+  //     appStore.stored_values = response.data
+  //   })
+  // } else {
+  //   updateValues(appStore.stored_values)
+  // }
+
+  
   
 })
 
