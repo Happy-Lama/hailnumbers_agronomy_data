@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import SoilParameters
+from .models import SoilParameters, DataCollectionModule
 # Register your models here.
 
 
-admin.register(SoilParameters)
+admin.site.register(SoilParameters)
+admin.site.register(DataCollectionModule)

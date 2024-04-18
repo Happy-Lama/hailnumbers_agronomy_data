@@ -40,10 +40,22 @@ def add_parameters(request):
 
 @api_view(['GET'])
 def get_parameters(request, module_id):
-    module = DataCollectionModule.objects.get(module_id=module_id)
-    parameters = module.soilparameters_set.order_by('-timestamp')
-    serialized_parameters = SoilParametersSerializer(parameters, many=True)
-    return Response(data=serialized_parameters.data, status=status.HTTP_200_OK)
+    try:
+        module = DataCollectionModule.objects.get(module_id=module_id)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if module:
+        start_date = request.GET.get('startDate', None)
+        end_date = request.GET.get('endDate', None)
+        if end_date and start_date:
+            parameters = module.soilparameters_set.filter(timestamp__range = [start_date, end_date])
+            serialized_parameters = SoilParametersSerializer(parameters, many=True)
+            return Response(data=serialized_parameters.data, status=status.HTTP_200_OK)
+        else:
+            parameters = module.soilparameters_set.order_by('-timestamp')[:100]
+            serialized_parameters = SoilParametersSerializer(parameters, many=True)
+            return Response(data=serialized_parameters.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
 def get_modules(request):
