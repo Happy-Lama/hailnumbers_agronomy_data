@@ -36,7 +36,8 @@ function updateMarkers(){
             console.log(mapmarker.options.title)
             appStore.selected_module = mapmarker.options.title
             // axios.get(`http://127.0.0.1:8000/api/soilParameters/${mapmarker.options.title}/`)
-            axios.get(`https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/${mapmarker.options.title}/`)
+            // axios.get(`https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/${mapmarker.options.title}/`)
+            axios.get(`https://hailnumbers.pythonanywhere.com/api/soilParameters/${mapmarker.options.title}`)
             .then((response) => {
                 console.log(response.data);
                 appStore.stored_values = response.data;
