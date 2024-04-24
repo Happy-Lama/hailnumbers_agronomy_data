@@ -77,7 +77,8 @@ onMounted(() => {
 
     if(appStore.modules == null){
         // axios.get("http://127.0.0.1:8000/api/soilParameters/modules/all/")
-        axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/modules/all/")
+        // axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/modules/all/")
+        axios.get("https://hailnumbers.pythonanywhere.com/api/soilParameters/modules/all/")
         .then((response) => {
         console.log(response.data)
         appStore.modules = response.data

@@ -20,14 +20,14 @@ def add_parameters(request):
         data = json.loads(request.body.decode('utf-8'))
         print("Received Data", data)
         print("Type received:", type(data))
-        for key in data.keys():
-            if key != 'timestamp':
-                data[key] = float(data[key])
+        # for key in data.keys():
+        #     if key != 'timestamp':
+        #         data[key] = float(data[key])
         if data:
             serializer = SoilParametersSerializer(data=data)
             
             if serializer.is_valid():
-                print(serializer.data)
+                # print(serializer.data)
                 try:
                     serializer.save()
                 except:

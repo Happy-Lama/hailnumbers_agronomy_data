@@ -36,7 +36,8 @@ const filter = () => {
     if(startDate.value && endDate.value && appStore.selected_module != null){
         console.log(startDate.value, endDate.value);
         // axios.get(`http://127.0.0.1:8000/api/soilParameters/${appStore.selected_module}/?startDate=${startDate.value}&endDate=${endDate.value}&`)
-        axios.get(`https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/${appStore.selected_module}/?startDate=${startDate.value}&endDate=${endDate.value}&`)
+        // axios.get(`https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/${appStore.selected_module}/?startDate=${startDate.value}&endDate=${endDate.value}&`)
+        axios.get(`https://hailnumbers.pythonanywhere.com/api/soilParameters/${appStore.selected_module}/?startDate=${startDate.value}&endDate=${endDate.value}&`)
         .then((response) => {
             console.log(response.data);
             appStore.stored_values = response.data;
