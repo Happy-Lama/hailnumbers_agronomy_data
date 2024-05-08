@@ -131,7 +131,7 @@ const updateValues = (newVal) => {
   }
 
   newVal.forEach((newVal) => {
-    values.timestamps.push(newVal.id)
+    values.timestamps.push(newVal.timestamp)
     values.moisture.push(newVal.soil_moisture)
     values.temp.push(newVal.soil_temperature)
     values.ec.push(newVal.soil_electrical_conductivity)
