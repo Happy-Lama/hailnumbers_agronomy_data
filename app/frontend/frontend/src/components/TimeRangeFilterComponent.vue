@@ -1,19 +1,19 @@
 <template>
     <form>
         <v-card>
-            <v-container>
+            <v-container class="datetime_container">
                 <v-row>
                     <v-col>
                         <p>
                             <label for="startdatetime">Start Date and Time</label>
                         </p>
-                        <input type="datetime-local" id="startdatetime" name="startdatetime" v-model="startDate" class="border border-sm">
+                        <input type="datetime-local" id="startdatetime" name="startdatetime" v-model="startDate" class="datetime">
                     </v-col>
                     <v-col>
                         <p>
                             <label for="enddatetime">End Date and Time</label>
                         </p>
-                        <input type="datetime-local" id="enddatetime" name="enddatetime" v-model="endDate" class="border border-sm">
+                        <input type="datetime-local" id="enddatetime" name="enddatetime" v-model="endDate" class="datetime">
                     </v-col>
                 </v-row>
             </v-container>
@@ -56,7 +56,6 @@ form{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
 }
 
 form > .v-card > input {
@@ -66,8 +65,16 @@ form .v-card{
     margin: 1rem;
     padding: 0.7rem;
     font-size: 18px;
+    box-shadow: 2px 3px 9px -3px black;
 }
 form .v-btn{
     margin-top: 1rem;
 }
+
+.datetime{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px
+}
+
 </style>

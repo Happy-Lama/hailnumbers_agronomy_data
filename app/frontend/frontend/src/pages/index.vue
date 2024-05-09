@@ -7,7 +7,7 @@
       <v-row justify="center">
         <!-- Two graphs conductivity and ph -->
           <!-- <v-container fluid> -->
-          <v-col cols="md-4" class="pa-5">
+          <v-col cols="md-6" class="pa-5">
             <v-container fluid>
               <v-row>
                 <!-- conductivity graph -->
@@ -31,7 +31,6 @@
           <v-col cols="md-6" class="pa-5">
             <v-container fluid>
               <v-row>
-
                 <!-- npk graph -->
                 <v-card width="100%" class="elevation-7 pr-2">
                   <ChartComponent :chart-data="npk" data-type="npk" chart-title="NPK Graph"></ChartComponent>
@@ -40,7 +39,7 @@
               </v-row>
 
               <v-row class="mt-5 pa-0" align="center" justify="center">
-                <v-col cols="md-6" class="pa-1">
+                <v-col cols="md-12" class="pa-1">
                   <!-- temperature -->
                   <v-card class="ma-1 elevation-7 pr-2">
                     <!-- <v-card-title>Temperature Graph</v-card-title> -->
@@ -48,7 +47,7 @@
                   </v-card>
                 </v-col>
 
-                <v-col cols="md-6" class="pa-1">
+                <v-col cols="md-12" class="pa-1">
                   <!-- moisture -->
                   <v-card class="ma-1 elevation-7 pr-2">
                     <!-- <v-card-title>Moisture Content Graph</v-card-title> -->
