@@ -63,7 +63,7 @@
         <v-row class="my-2" justify="space-around">
           <!-- <v-col> -->
           
-          <a href="https://hailnumbers.pythonanywhere.com/api/soilParameters/download/{{appStore.selected_module}}/" style="text-decoration: none;">
+          <a href="https://hailnumbers.pythonanywhere.com/api/soilParameters/download/" style="text-decoration: none;">
           <!-- <a href="http://127.0.0.1:8000/api/soilParameters/download/{{appStore.selected_module}}/" style="text-decoration: none;"> -->
             <v-btn rounded="lg" size="x-large" block variant="outlined">
               Download Data As CSV
