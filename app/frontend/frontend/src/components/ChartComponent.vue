@@ -24,7 +24,7 @@ const chartData = ref({
 
 
 watch(() => props.chartData, (newVal) => {
-    // console.log('Old Value', chartData.value)
+    // plot the received values in a chart
     chartData.value = {
         labels: newVal.timestamps, 
         datasets: newVal.datasets
@@ -41,7 +41,7 @@ const chartOptions = ref({
                 text: "Time"
             }, 
             ticks : {
-                display: true,
+                display: false,
             }
         },
         y: {

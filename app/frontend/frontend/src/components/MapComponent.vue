@@ -1,5 +1,5 @@
 <template>
-    <div id="map" style="height: 45vh; ">
+    <div id="map" style="height: 50vh; ">
     </div>
 
 </template>
@@ -20,8 +20,11 @@ const appStore = useAppStore();
 
 
 function updateMarkers(){
+    // function to place new markers on the map
+
     console.log('Updating map markers')
-    //marker for each module received
+
+    //create marker for each module received
     let locations = []
     
     deployed_modules.value.forEach((module) => {
@@ -35,8 +38,6 @@ function updateMarkers(){
         mapmarker.on('click', () => {
             console.log(mapmarker.options.title)
             appStore.selected_module = mapmarker.options.title
-            // axios.get(`http://127.0.0.1:8000/api/soilParameters/${mapmarker.options.title}/`)
-            // axios.get(`https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/${mapmarker.options.title}/`)
             axios.get(`https://hailnumbers.pythonanywhere.com/api/soilParameters/${mapmarker.options.title}`)
             .then((response) => {
                 console.log(response.data);
@@ -47,6 +48,7 @@ function updateMarkers(){
     });
 
     if(locations){
+        // reposition map to show all the markers
         console.log(locations)
         let bounds = L.latLngBounds(locations)
         if(map.value){
@@ -56,6 +58,7 @@ function updateMarkers(){
 }
 
 watch(() => appStore.modules, (newVal, oldVal) => {
+    // update the markers on the map
     console.log('Transformers have changed')
     deployed_modules.value = newVal
     updateMarkers();
@@ -66,6 +69,7 @@ watch(() => appStore.modules, (newVal, oldVal) => {
 }) 
 
 onMounted(() => {
+    // initialize map
     map.value = L.map('map').setView([0.34759640, 32.58251970], 12);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -77,8 +81,7 @@ onMounted(() => {
     });
 
     if(appStore.modules == null){
-        // axios.get("http://127.0.0.1:8000/api/soilParameters/modules/all/")
-        // axios.get("https://hailnumbers-agronomy-data.onrender.com/api/soilParameters/modules/all/")
+        // fetch module information from the backend
         axios.get("https://hailnumbers.pythonanywhere.com/api/soilParameters/modules/all/")
         .then((response) => {
         console.log(response.data)
